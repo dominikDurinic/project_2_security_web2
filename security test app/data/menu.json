@@ -1,0 +1,14 @@
+[
+    {
+        "id":"1",
+        "name":"XSS - Cross-site scripting",
+        "srcImage":"/images/xss.png",
+        "details":" "
+    },
+    {
+        "id":"2",
+        "name":"BAC - Broken Access Control",
+        "srcImage":"/images/bac.png",
+        "details":" "
+    }
+]
