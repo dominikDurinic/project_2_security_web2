@@ -1,0 +1,18 @@
+[
+    {
+        "id":"1",
+        "title":"XSS - Cross-site scripting",
+        "srcImage":"/images/xss.png",
+        "simulation":"Mindfulness chat",
+        "story":"Zamislimo da naša web aplikacija omogućuje razgovor sa psihoterapeutom preko online chat-a. Korisnik svoje vlastite misli, osjećaje i odgovore na pitanja psihoterapeuta unosi putem input forme. Nakon toga svoju poruku potvđuje i šalje pritiskom na gumb Pošalji.",
+        "task":["Ispitajte ponašanje web aplikacije ako je ranjivost uklonjena različitim sigurnosnim provjerama (tj. isključena) te ako ranjivost aplikacije postoji (tj. uključena).","Unesite i pošaljite poruku po volji kako bismo testirali sustav - npr. Pozdrav. Danas sam odlično!", "Proslijedimo jednostavniju scriptu kao poruku kako bismo provjerili sigurnost aplikacije - npr. <script>alert('Script works!');</script>", "Konačno dohvatimo cookie prijavljenog korisnika - npr. <script>alert(document.cookie);</script>. Ako niste prijavljeni testnim korisnikom, prijavite se."]
+    },
+    {
+        "id":"2",
+        "title":"BAC - Broken Access Control",
+        "srcImage":"/images/bac.png",
+        "simulation":"Mindfulness chat",
+        "story":"Zamislimo da naša web aplikacija omogućuje razgovor sa psihoterapeutom preko online chat-a. Korisnik svoje vlastite misli, osjećaje i odgovore na pitanja psihoterapeuta unosi putem input forme. Nakon toga svoju poruku potvđuje i šalje pritiskom na gumb Pošalji.",
+        "task":["Ispitajte ponašanje web aplikacije ako je ranjivost uklonjena različitim sigurnosnim provjerama (tj. isključena) te ako ranjivost postoji (tj. uključena).","Unesite i pošaljite poruku po volji kako bismo testirali sustav - npr. Pozdrav. Danas sam odlično!", "Proslijedimo jednostavniju scriptu kao poruku kako bismo provjerili sigurnost aplikacije - npr. <script>alert('Script works!');</script>", "Konačno dohvatimo cookie prijavljenog korisnika - npr. <script>alert(document.cookie);</script>. Ako niste prijavljeni testnim korisnikom, prijavite se."]
+    }
+]
