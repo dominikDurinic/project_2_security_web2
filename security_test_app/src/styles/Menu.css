@@ -1,3 +1,8 @@
+.menu-msg{
+    margin: 0px;
+    padding-top: 50px;
+}
+
 .menu-container{
     width: 100%;
     display: flex;
@@ -10,5 +15,4 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 20px;
 }

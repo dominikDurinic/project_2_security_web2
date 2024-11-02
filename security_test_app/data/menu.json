@@ -1,0 +1,18 @@
+[
+    {
+        "id":"1",
+        "shortName":"xss",
+        "name":"XSS - Cross-site scripting",
+        "srcImage":"/images/xss.png",
+        "details":"Oblik napada u kojemu se podaci od napadača šalju u preglednik korisnika. Potencijalnim napadačima omogućava se umetanje i izvršavanje zlonamjernog skriptnog koda unutar ranjive stranice. Korisnik ili njegovi povjerljivi podaci preusmjere s legitimnog na neki maliciozni web poslužitelj, čime se zaobilaze domenske restrikcije poslužitelja. Postoje tri vrste XSS ranjivosti: reflektirani, pohranjeni i DOM XSS.",
+        "literature":"WEB2 - 3.predavanje, https://www.fer.unizg.hr/_download/repository/03-Sigurnost[2].pdf"
+    },
+    {
+        "id":"2",
+        "shortName":"bac",
+        "name":"BAC - Broken Access Control",
+        "srcImage":"/images/bac.png",
+        "details":"Ispravna kontrola pristupa omogućuje korisnicima djelovanje unutar dopuštenih ovlasti. Ako navedena kontrola nije ispravno implementirana, napadač može neovlašteno pristupiti određenim informacijama, izmijeniti ih  ili uništiti.",
+        "literature":"WEB2 - 3.predavanje, https://www.fer.unizg.hr/_download/repository/03-Sigurnost[2].pdf"
+    }
+]

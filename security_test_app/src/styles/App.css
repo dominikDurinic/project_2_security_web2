@@ -3,19 +3,19 @@ main{
     flex-direction: column;
     align-items: center;
     width: 1000px;
-    height: calc(100% - (120px + 80px));
+    min-height: calc(100% - (140px + 160px));
 }
 
 .header-container{
     position: sticky;
     top: 0px;
     left: 0px;
-    width: 100vw;
-    height: 60px;
+    width: 100%;
+    height: 120px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 50px;
     background-color: #5f9ea0;
     padding: 20px 0px;
     color: white;
@@ -37,11 +37,16 @@ main{
     text-decoration: underline;
 }
 
+.loggedUser{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+}
+
+
 .footer-container{
-    position: sticky;
-    bottom: 0px;
-    left: 0px;
-    width: 100vw;
+    width: 100%;
     height: 100px;
     display: flex;
     flex-direction: column;
@@ -59,12 +64,16 @@ main{
     font-weight: bold;
 }
 
+.italic-text{
+    font-style: italic;
+}
+
 .vul-container{
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 20px;
-    width: 100%;
+    width: calc(1000px - 40px);
     border: 1px black;
     box-shadow: 2px 2px #dcdcdc;
     background-color: whitesmoke;
@@ -84,4 +93,36 @@ main{
 .vul-icon{
     border-radius: 50%;
     width: 60px;
+}
+
+.vulCard-container{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    width: calc(1000px - 40px);
+    border: 1px black;
+    box-shadow: 2px 2px #dcdcdc;
+    background-color: #dcdcdc;
+}
+
+.btn-vul-start{
+    border: none;
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    background-color: #5f9ea0;
+    color: white;
+    font-size: medium;
+    padding: 20px 0px;
+    box-shadow: 2px 2px #dcdcdc;
+    cursor: pointer;
+}
+
+.btn-vul-start:hover{
+    background-color: #6d9e9f;
+}
+
+.btnDiv{
+    display: flex;
+    justify-content: space-between;
 }

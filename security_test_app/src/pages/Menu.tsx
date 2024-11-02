@@ -8,9 +8,11 @@ import { VulCard } from "../components/VulCard";
 
 interface VulData {
   id: string;
+  shortName: string;
   name: string;
   srcImage: string;
   details: string;
+  literature: string;
 }
 
 export function Menu() {
@@ -22,8 +24,8 @@ export function Menu() {
     <>
       <Header selected={2} />
       <main>
-        <h3>
-          Izaberite 1 od {newData.length} ponuđene ranjivost te ispitajte njenu
+        <h3 className="menu-msg">
+          Izaberite 1 od {newData.length} ponuđene ranjivosti te ispitajte njenu
           opasnost.
         </h3>
         <div className="menu-container">
@@ -38,7 +40,11 @@ export function Menu() {
                 setWhoClicked={(who) => setWhoClick(who)}
               />
               {click && whoClick === item.name && (
-                <VulCard details={item.details} />
+                <VulCard
+                  shortName={item.shortName}
+                  details={item.details}
+                  literature={item.literature}
+                />
               )}
             </div>
           ))}
