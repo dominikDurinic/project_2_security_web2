@@ -36,52 +36,30 @@ export function Login() {
           <div className="login-container">
             <img src="/images/logo3.png" alt="logo" width={"50px"} />
             <h3>Prijava</h3>
-            <p className="test-msg">
-              Podaci za prijavu - <br /> e-pošta:{" "}
-              <span className="italic-text bold-text">admin@fer.hr</span>,
-              lozinka:{" "}
-              <span className="italic-text bold-text">attackMe123</span>
-            </p>
-            {/*
-            {incorrect && (
-              <p className="warning-msg">
-                Pogrešno korisničko ime ili lozinka.
+            <div className="test-msg">
+              <p className="bold-text">Podaci za prijavu:</p>
+              <p>
+                e-pošta:{" "}
+                <span className="italic-text bold-text">admin@fer.hr</span> ,
               </p>
-            )}
-            <form className="login-form">
-              <label htmlFor="user" className="bold-text">
-                Korisničko ime:
-              </label>
-              <input
-                type="text"
-                id="user"
-                placeholder="Unesite korisničko ime"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-              ></input>
-              <label htmlFor="pass" className="bold-text">
-                Lozinka:
-              </label>
-              <input
-                type="password"
-                id="pass"
-                placeholder="Unesite lozinku"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              ></input>
-            </form>
-            
-            
-            <a
-              href={incorrect ? "#" : "/"}
-              onClick={() => checkLogin(username, password)}
-            >
-              */}
+              <p>
+                lozinka:{" "}
+                <span className="italic-text bold-text">attackMe123</span>
+              </p>
+              <p className="italic-text">
+                (Za potrebe BAC ranjivosti koristite sljedeće podatke:
+              </p>
+              <p>
+                e-pošta: <span className="italic-text">ucenik10@fer.hr</span> ,
+              </p>
+              <p>
+                lozinka: <span className="italic-text ">loveSchool123</span> )
+              </p>
+            </div>
             <button className="btn-login" onClick={() => loginWithRedirect()}>
               <img src="/images/auth0_logo.png" width="90px" />
               Prijavi se.
             </button>
-            {/*</a> */}
           </div>
         </div>
       </main>

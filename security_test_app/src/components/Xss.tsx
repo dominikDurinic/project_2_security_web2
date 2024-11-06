@@ -6,25 +6,52 @@ import ProfileContext from "../../context/ProfileContext";
 export function Xss(props: { vule: boolean }) {
   const [msg, setMsg] = useState<string>("");
   const [msgList, setMsgList] = useState<string[]>([]);
+  const [sanitMsgList, setSanitMsgList] = useState<string[]>([]);
   const [vuleReady, setVuleReady] = useState(false);
 
   const profile = useContext(ProfileContext);
 
-  function sendMsg(value: string) {
-    setMsgList(msgList.concat(value));
+  function sanitization(char: string) {
+    switch (char) {
+      case "<":
+        return "&lt;";
+      case ">":
+        return "&gt;";
+      case '"':
+        return "&quot;";
+      case "&":
+        return "&amp;";
+      case "\\":
+        return "&#39;";
+      case "/":
+        return "&#x2F;";
+      default:
+        return char;
+    }
   }
 
   function validateInput(msg: string) {
-    //provjera unosa - detektiranje html tagova u inputu
-    const pattern = /<(.*)>/;
+    //provjera unosa - detektiranje html tagova i sintakse u inputu, g - globalno
+    const pattern = /[&<>"'\\/]/g;
     const result = pattern.test(msg.toLowerCase());
     if (result) {
-      return (
-        '🚫 Syntax error - Cannot send html tags in message: "' + msg + '"'
-      );
+      //ako su detektirani neki znakovi iz patterna onda je potrebna sanitizacija ulaza
+      const sanitized_msg = msg.replace(pattern, (char) => sanitization(char));
+      return [
+        '🚫 Syntax error - Your input has been sanitized.<br/> Before: <br/>"' +
+          sanitized_msg +
+          '",<br/>After sanitization:<br/>',
+        sanitized_msg,
+      ];
     } else {
-      return msg;
+      //inace samo proslijedi na izlaz
+      return [msg, ""];
     }
+  }
+
+  function sendMsg(value: string, valueSan: string) {
+    setMsgList(msgList.concat(value));
+    setSanitMsgList(sanitMsgList.concat(valueSan));
   }
 
   useEffect(() => {
@@ -36,6 +63,7 @@ export function Xss(props: { vule: boolean }) {
     <>
       <div className="input-div">
         <input
+          className="input-msg"
           placeholder="Enter your message..."
           onChange={(e) => setMsg(e.target.value)}
           value={msg}
@@ -43,11 +71,19 @@ export function Xss(props: { vule: boolean }) {
         <button
           className="btn-chat"
           onClick={() => {
+            if (msg === "") {
+              sendMsg(" ", "");
+              setMsg("");
+              return;
+            }
             if (!vuleReady) {
+              {
+                /*Ako nema ranjivosti, onda ulaz odlazi na validaciju */
+              }
               const validatedMsg = validateInput(msg);
-              sendMsg(validatedMsg);
+              sendMsg(validatedMsg[0], validatedMsg[1]);
             } else {
-              sendMsg(msg);
+              sendMsg(msg, "");
             }
             setMsg("");
           }}
@@ -66,15 +102,10 @@ export function Xss(props: { vule: boolean }) {
             <div className="msg-box msg-box-me">
               {/*<InnerHTML/> tj. dangerouslySetInnerHTML - prepoznaju se html tags iz string tipa i prevode,
                   navedeno nam omogucuje izvodenje xss vrste napada jer se ne provjeravaju tagovi
-                   <script>, <img> i dr. unutar kojih mozemo postaviti malicioznu scriptu*/}
-              {vuleReady ? (
-                <>
-                  <InnerHTML html={msg} />
-                  <p>{msg}</p>
-                </>
-              ) : (
-                <p>{msg}</p>
-              )}
+                   <script>, <img> i dr. unutar kojih mozemo postaviti malicioznu scriptu
+                   Kako bismo sprijecili navedenu ranjivost sanitiziramo ulaz - input.*/}
+              <InnerHTML html={msg} />
+              {!vuleReady && <p>{sanitMsgList[index]}</p>}
             </div>
           </div>
         ))}
