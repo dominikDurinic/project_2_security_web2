@@ -1,8 +1,23 @@
+import { useAuth0 } from "@auth0/auth0-react";
 import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
+import { useContext } from "react";
+import ProfileContext from "../../context/ProfileContext";
 import "../styles/Home.css";
+import { useEffect } from "react";
 
 export function Home() {
+  const profile = useContext(ProfileContext);
+
+  const { user, isAuthenticated } = useAuth0();
+
+  useEffect(() => {
+    if (user && user.name) {
+      profile.changeUsername(user?.name);
+      localStorage.setItem("username", user?.name);
+    }
+  }, [isAuthenticated]);
+
   return (
     <>
       <Header selected={1} />

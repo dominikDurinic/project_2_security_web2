@@ -68,10 +68,10 @@ export function Xss(props: { vule: boolean }) {
                   navedeno nam omogucuje izvodenje xss vrste napada jer se ne provjeravaju tagovi
                    <script>, <img> i dr. unutar kojih mozemo postaviti malicioznu scriptu*/}
               {vuleReady ? (
-                <p>
+                <>
                   <InnerHTML html={msg} />
-                  {msg}
-                </p>
+                  <p>{msg}</p>
+                </>
               ) : (
                 <p>{msg}</p>
               )}

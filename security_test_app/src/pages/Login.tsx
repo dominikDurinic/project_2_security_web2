@@ -1,17 +1,20 @@
-import { useContext, useState } from "react";
+//import { useContext, useState } from "react";
 import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
 import "../styles/Login.css";
-import ProfileContext from "../../context/ProfileContext";
+//import ProfileContext from "../../context/ProfileContext";
+import { useAuth0 } from "@auth0/auth0-react";
 
 export function Login() {
-  const [username, setUsername] = useState("");
+  /*const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [incorrect, setIncorrect] = useState(false);
 
   const profile = useContext(ProfileContext);
+*/
+  const { loginWithRedirect } = useAuth0();
 
-  function checkLogin(username: string, password: string) {
+  /*function checkLogin(username: string, password: string) {
     if (username === "admin" && password === "attackMe123") {
       setIncorrect(false);
       profile.changeUsername(username);
@@ -23,7 +26,7 @@ export function Login() {
       setPassword("");
       return false;
     }
-  }
+  }*/
 
   return (
     <>
@@ -34,10 +37,12 @@ export function Login() {
             <img src="/images/logo3.png" alt="logo" width={"50px"} />
             <h3>Prijava</h3>
             <p className="test-msg">
-              Podaci za prijavu - <br /> korisničko ime:{" "}
-              <span className="italic-text bold-text">admin</span>, lozinka:{" "}
+              Podaci za prijavu - <br /> e-pošta:{" "}
+              <span className="italic-text bold-text">admin@fer.hr</span>,
+              lozinka:{" "}
               <span className="italic-text bold-text">attackMe123</span>
             </p>
+            {/*
             {incorrect && (
               <p className="warning-msg">
                 Pogrešno korisničko ime ili lozinka.
@@ -65,12 +70,18 @@ export function Login() {
                 onChange={(e) => setPassword(e.target.value)}
               ></input>
             </form>
+            
+            
             <a
               href={incorrect ? "#" : "/"}
               onClick={() => checkLogin(username, password)}
             >
-              <button className="btn-vul-start">Prijavi se</button>
-            </a>
+              */}
+            <button className="btn-login" onClick={() => loginWithRedirect()}>
+              <img src="/images/auth0_logo.png" width="90px" />
+              Prijavi se.
+            </button>
+            {/*</a> */}
           </div>
         </div>
       </main>

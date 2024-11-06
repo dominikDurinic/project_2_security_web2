@@ -1,13 +1,19 @@
 import { useContext } from "react";
 import ProfileContext from "../../context/ProfileContext";
+import { useAuth0 } from "@auth0/auth0-react";
 
 export function Header(props: { selected: number }) {
   const profile = useContext(ProfileContext);
 
-  function logout() {
-    localStorage.setItem("username", "");
+  const { logout } = useAuth0();
+
+  const logOutAll = () => {
     profile.changeUsername("");
-  }
+    localStorage.setItem("username", "");
+    logout({
+      logoutParams: { returnTo: import.meta.env.VITE_REDIRECT_URI },
+    });
+  };
 
   return (
     <div className="header-container">
@@ -27,11 +33,11 @@ export function Header(props: { selected: number }) {
             Izbornik
           </h4>
         </a>
-        {profile.username !== "" ? (
+        {profile.username ? (
           <a
             className="loggedUser"
             onClick={() => {
-              logout();
+              logOutAll();
             }}
           >
             <h4>{profile.username}</h4>

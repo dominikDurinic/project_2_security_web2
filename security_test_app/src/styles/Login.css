@@ -42,3 +42,20 @@
 .warning-msg{
     color: red;
 }
+
+.btn-login{
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #5f9ea0;
+    font-size: medium;
+    padding: 20px 10px;
+    width: 325px;
+    cursor: pointer;
+    gap: 10px;
+}
+
+.btn-login:hover{
+    background-color: #6d9e9f;
+}
