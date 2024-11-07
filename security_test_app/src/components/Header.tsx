@@ -36,7 +36,8 @@ export function Header(props: { selected: number }) {
         {profile.username ? (
           <a
             className="loggedUser"
-            onClick={() => {
+            onClick={(e) => {
+              e.preventDefault();
               logOutAll();
             }}
           >

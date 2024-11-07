@@ -6,27 +6,7 @@ import "../styles/Login.css";
 import { useAuth0 } from "@auth0/auth0-react";
 
 export function Login() {
-  /*const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [incorrect, setIncorrect] = useState(false);
-
-  const profile = useContext(ProfileContext);
-*/
   const { loginWithRedirect } = useAuth0();
-
-  /*function checkLogin(username: string, password: string) {
-    if (username === "admin" && password === "attackMe123") {
-      setIncorrect(false);
-      profile.changeUsername(username);
-      localStorage.setItem("username", username);
-      return true;
-    } else {
-      setIncorrect(true);
-      setUsername("");
-      setPassword("");
-      return false;
-    }
-  }*/
 
   return (
     <>

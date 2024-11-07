@@ -4,6 +4,7 @@ import axios from "axios";
 
 export function Bac() {
   const [msg, setMsg] = useState<string>("");
+  const [response, setResponse] = useState<string>("");
 
   const { getAccessTokenSilently } = useAuth0();
 
@@ -11,10 +12,13 @@ export function Bac() {
     try {
       const token = await getAccessTokenSilently();
       const response = await axios.get("http://localhost:8000/protected", {
-        headers: { Authorization: `Bearer ${token}` },
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       });
-      console.log(response.data);
+      setResponse(response.data);
     } catch (error) {
+      setResponse("" + error);
       console.error("Error fetching protected data:", error);
     }
   };
@@ -38,6 +42,7 @@ export function Bac() {
           Pretraži
         </button>
       </div>
+      <p>{response}</p>
     </>
   );
 }

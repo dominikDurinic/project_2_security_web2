@@ -12,7 +12,9 @@ createRoot(document.getElementById("root")!).render(
       authorizationParams={{
         redirect_uri: import.meta.env.VITE_REDIRECT_URI,
         audience: import.meta.env.VITE_AUDIENCE,
-        scope: "openid profile email",
+        scope:
+          "openid profile email read:allgrades read:grades update:grades delete:grades",
+        prompt: "consent",
       }}
     >
       <App />
