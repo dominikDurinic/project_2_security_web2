@@ -6,6 +6,8 @@ import { Menu } from "./Menu";
 import { Vulnerability } from "./Vulnerability";
 import { useState } from "react";
 import ProfileContext from "../../context/ProfileContext";
+import { AllStudents } from "./AllStudents";
+import { Student } from "./Student";
 
 function App() {
   const changeUsername = (newUser: string) => {
@@ -38,6 +40,11 @@ function App() {
                 path="vulnerability/bac"
                 element={<Vulnerability id={2} />}
               />
+              <Route
+                path="ednevnik/admin/allstudents"
+                element={<AllStudents />}
+              />
+              <Route path="ednevnik/admin/student/:id" element={<Student />} />
             </Route>
           </Routes>
         </BrowserRouter>

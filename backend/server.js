@@ -11,6 +11,7 @@ dotenv.config();
 const port = process.env.PORT || 8000;
 
 server.use(cors());
+server.use(express.json());
 
 const checkJwt = auth({
   audience: process.env.AUDIENCE,
@@ -18,34 +19,39 @@ const checkJwt = auth({
   tokenSigningAlg: "RS256",
 });
 
-server.use(checkJwt);
-
-const checkRole = (req) => {
+const checkRole = (req, allowedRole) => {
   const token = req.headers.authorization.split(" ")[1];
 
   const decodedToken = jwt.decode(token);
 
   const roles = decodedToken[process.env.RULE_NAMESPACE + "roles"];
 
-  // Check if the user has a specific role (example)
-  if (roles.includes("admin")) {
+  //provjera je li prijavljeni korisnik ima dopustenu ulogu za pristup
+  if (roles.includes(allowedRole)) {
     return true;
   } else {
     return false;
   }
 };
 
-// Public route
 server.get("/", (req, res) => {
   res.send("Hello from the public endpoint!");
 });
 
-// Protected route
-server.get("/protected", checkJwt, (req, res) => {
-  const roleCheck = checkRole(req);
+server.post("/protected", checkJwt, (req, res) => {
+  const vulnerability = req.body;
+
+  const roleCheck = checkRole(req, "admin");
+
+  const data = { role: "You have admin access!" };
+
+  if (vulnerability.vule) {
+    //ako je ranjiva app onda nema provjere ovlasti
+    return res.send(data);
+  }
 
   if (roleCheck) {
-    return res.send("You have admin access!");
+    return res.send(data);
   }
 
   return res.status(403).send("Forbidden: You do not have the required role");

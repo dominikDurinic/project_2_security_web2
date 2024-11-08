@@ -1,0 +1,79 @@
+.student-main-container{
+    width: 1000px;
+}
+
+.student-container{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    padding: 40px 0px;
+}
+
+.student-info-div{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.student-info-div > h3, .student-info-div > h1, .student-info-div > p{
+    margin: 0px;
+}
+
+.table-div{
+    width: 100%;
+}
+
+.grades-table, th, td{
+    border: 1px solid gray;
+    border-collapse: collapse;
+}
+
+.grades-table{
+    width: 100%;
+}
+
+th,td{
+    width: 70%;
+    padding: 10px 3px;
+}
+
+.grades-td{
+    text-align: center;
+}
+
+tr:nth-child(even) {
+    background-color: #ededed;
+}
+
+.btn-div{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    padding: 40px 0px;
+}
+
+.btn-ednevnik{
+    width: 200px;
+    padding: 10px 0px;
+    cursor: pointer;
+}
+
+.delete-btn{
+    background-color: rgb(245, 52, 52);
+}
+
+.delete-btn:hover{
+    background-color: rgb(246, 80, 80);
+}
+
+.back-btn-div{
+    padding: 20px;
+    display: flex;
+    width: 100%;
+}
+
+.back-btn-div > a > button{
+    cursor: pointer;
+}
