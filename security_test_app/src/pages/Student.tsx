@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from "react";
 import ProfileContext from "../../context/ProfileContext";
-import VuleContext from "../../context/VuleContext";
 import { useNavigate, useParams } from "react-router-dom";
 import { HeaderEdnevnik } from "../components/HeaderEdnevnik";
 import "../styles/Student.css";
@@ -24,7 +23,12 @@ interface GradesAvg {
 
 export function Student() {
   const profile = useContext(ProfileContext);
-  const vule = useContext(VuleContext);
+  let vule;
+  if (localStorage.getItem("vule") === "false") {
+    vule = false;
+  } else {
+    vule = true;
+  }
 
   const [response, setResponse] = useState<string>("");
   const [studentInfo, setStudentInfo] = useState<Student[]>();
@@ -51,7 +55,7 @@ export function Student() {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ vule: vule.vule }),
+          body: JSON.stringify({ vule: vule }),
         });
         if (!resp.ok) {
           throw new Error(resp.status + " " + resp.statusText);
@@ -63,6 +67,7 @@ export function Student() {
       } catch (error) {
         setResponse("" + error);
         console.error("Error fetching protected data:", error);
+        setLoading(false);
       }
     };
 
@@ -75,7 +80,7 @@ export function Student() {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ vule: vule.vule }),
+          body: JSON.stringify({ vule: vule }),
         });
         if (!resp.ok) {
           throw new Error(resp.status + " " + resp.statusText);
@@ -87,6 +92,7 @@ export function Student() {
       } catch (error) {
         setResponse("" + error);
         console.error("Error fetching protected data:", error);
+        setLoading(false);
       }
     };
 
@@ -101,7 +107,7 @@ export function Student() {
               Authorization: `Bearer ${token}`,
               "Content-Type": "application/json",
             },
-            body: JSON.stringify({ vule: vule.vule }),
+            body: JSON.stringify({ vule: vule }),
           }
         );
         if (!resp.ok) {
@@ -114,16 +120,15 @@ export function Student() {
       } catch (error) {
         setResponse("" + error);
         console.error("Error fetching protected data:", error);
+        setLoading(false);
       }
+      setLoading(false);
     };
 
     getStudentInfo();
     getStudentGrades();
     getGradesAvg();
-    if (studentGrades && studentInfo && gradesAvg) {
-      setLoading(false);
-    }
-  });
+  }, []);
 
   return (
     <>
@@ -154,7 +159,7 @@ export function Student() {
                 />
                 <div className="student-info-div">
                   <h1>{studentInfo && studentInfo[0].name}</h1>
-                  <h3>id:{studentInfo && studentInfo[0].student_id}</h3>
+                  <h3>[ID: {studentInfo && studentInfo[0].student_id}]</h3>
                   <p>{studentInfo && studentInfo[0].school}</p>
                 </div>
               </div>

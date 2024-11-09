@@ -8,8 +8,6 @@ const db = require("../backend/db/index");
 
 dotenv.config();
 
-const port = process.env.PORT || 8000;
-
 server.use(cors());
 server.use(express.json());
 
@@ -26,9 +24,7 @@ const checkRole = (req, allowedRole) => {
 
   const roles = decodedToken[process.env.RULE_NAMESPACE + "roles"];
 
-  console.log(roles);
-
-  //provjera je li prijavljeni korisnik ima dopustenu ulogu za pristup
+  //provjera je li prijavljeni korisnik ima dopustenu ulogu za pristup (pravo pristupa)
   if (roles.includes(allowedRole)) {
     return true;
   } else {
@@ -121,4 +117,8 @@ server.post("/student/grades/avg/:id", checkJwt, async (req, res) => {
   return res.status(403).send("Forbidden: You do not have the required role");
 });
 
-server.listen(port);
+const hostname = "0.0.0.0";
+const externalUrl = process.env.RENDER_EXTERNAL_URL;
+const port =
+  externalUrl && process.env.PORT ? parseInt(process.env.PORT) : 8000;
+server.listen(port, hostname);
