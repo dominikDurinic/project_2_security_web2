@@ -1,8 +1,6 @@
-//import { useContext, useState } from "react";
 import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
 import "../styles/Login.css";
-//import ProfileContext from "../../context/ProfileContext";
 import { useAuth0 } from "@auth0/auth0-react";
 
 export function Login() {

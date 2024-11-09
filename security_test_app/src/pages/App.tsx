@@ -20,7 +20,7 @@ function App() {
   };
 
   const changeVule = (newVule: boolean) => {
-    //funkcija za promjenu konteksta ProfileContext od child komponenta
+    //funkcija za promjenu konteksta VuleContext od child komponenta
     setVule(() => ({
       vule: newVule,
       changeVule,
