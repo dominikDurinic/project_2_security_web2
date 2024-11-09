@@ -2,14 +2,16 @@ import { useContext, useEffect, useState } from "react";
 import "../styles/Vulnerability.css";
 import InnerHTML from "dangerously-set-html-content";
 import ProfileContext from "../../context/ProfileContext";
+import VuleContext from "../../context/VuleContext";
 
-export function Xss(props: { vule: boolean }) {
+export function Xss() {
   const [msg, setMsg] = useState<string>("");
   const [msgList, setMsgList] = useState<string[]>([]);
   const [sanitMsgList, setSanitMsgList] = useState<string[]>([]);
   const [vuleReady, setVuleReady] = useState(false);
 
   const profile = useContext(ProfileContext);
+  const vule = useContext(VuleContext);
 
   function sanitization(char: string) {
     switch (char) {
@@ -56,8 +58,8 @@ export function Xss(props: { vule: boolean }) {
 
   useEffect(() => {
     setMsgList([]);
-    setVuleReady(props.vule);
-  }, [props.vule]);
+    setVuleReady(vule.vule);
+  }, [vule.vule]);
 
   return (
     <>

@@ -1,13 +1,15 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import ProfileContext from "../../context/ProfileContext";
-import { Navigate, useParams } from "react-router-dom";
+import VuleContext from "../../context/VuleContext";
+import { useNavigate, useParams } from "react-router-dom";
 import { HeaderEdnevnik } from "../components/HeaderEdnevnik";
 import "../styles/Student.css";
+import { useAuth0 } from "@auth0/auth0-react";
 
 interface Student {
   name: string;
   student_id: number;
-  heShe: string;
+  heshe: string;
   school: string;
 }
 
@@ -16,73 +18,176 @@ interface Subject {
   grade: number;
 }
 
+interface GradesAvg {
+  avg: number;
+}
+
 export function Student() {
   const profile = useContext(ProfileContext);
+  const vule = useContext(VuleContext);
+
+  const [response, setResponse] = useState<string>("");
+  const [studentInfo, setStudentInfo] = useState<Student[]>();
+  const [studentGrades, setStudentGrades] = useState<Subject[]>();
+  const [gradesAvg, setGradesAvg] = useState<GradesAvg[]>();
+  const [loading, setLoading] = useState(true);
 
   const { id } = useParams();
+  const navigate = useNavigate();
 
-  const stud: Student = {
-    name: "Dominik Đurinić",
-    student_id: Number(id) || 1,
-    heShe: "m",
-    school: 'X.gimnazija "Ivan Supek"',
-  };
+  const { getAccessTokenSilently } = useAuth0();
 
-  const subj: Subject[] = [
-    { name: "Matematika", grade: 5 },
-    { name: "Fizika", grade: 4 },
-    { name: "Povijest", grade: 4 },
-    { name: "Informatika", grade: 5 },
-  ];
+  useEffect(() => {
+    if (profile.username === "") {
+      navigate("/login");
+    }
 
-  if (profile.username === "") {
-    return <Navigate to={"/login"} />;
-  }
+    const getStudentInfo = async () => {
+      try {
+        const token = await getAccessTokenSilently();
+        const resp = await fetch(`http://localhost:8000/student/${id}`, {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ vule: vule.vule }),
+        });
+        if (!resp.ok) {
+          throw new Error(resp.status + " " + resp.statusText);
+        } else {
+          const data = await resp.json();
+
+          setStudentInfo(data.rows);
+        }
+      } catch (error) {
+        setResponse("" + error);
+        console.error("Error fetching protected data:", error);
+      }
+    };
+
+    const getStudentGrades = async () => {
+      try {
+        const token = await getAccessTokenSilently();
+        const resp = await fetch(`http://localhost:8000/student/grades/${id}`, {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ vule: vule.vule }),
+        });
+        if (!resp.ok) {
+          throw new Error(resp.status + " " + resp.statusText);
+        } else {
+          const data = await resp.json();
+
+          setStudentGrades(data.rows);
+        }
+      } catch (error) {
+        setResponse("" + error);
+        console.error("Error fetching protected data:", error);
+      }
+    };
+
+    const getGradesAvg = async () => {
+      try {
+        const token = await getAccessTokenSilently();
+        const resp = await fetch(
+          `http://localhost:8000/student/grades/avg/${id}`,
+          {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ vule: vule.vule }),
+          }
+        );
+        if (!resp.ok) {
+          throw new Error(resp.status + " " + resp.statusText);
+        } else {
+          const data = await resp.json();
+
+          setGradesAvg(data.rows);
+        }
+      } catch (error) {
+        setResponse("" + error);
+        console.error("Error fetching protected data:", error);
+      }
+    };
+
+    getStudentInfo();
+    getStudentGrades();
+    getGradesAvg();
+    if (studentGrades && studentInfo && gradesAvg) {
+      setLoading(false);
+    }
+  });
+
   return (
     <>
       <HeaderEdnevnik />
-      <div className="student-main-container">
-        <div className="back-btn-div">
-          <a href="http://localhost:5173/ednevnik/admin/allstudents">
-            <button>{"< "}Povratak na listu učenika</button>
-          </a>
-        </div>
-        <div className="student-container">
-          <img
-            src={stud.heShe === "f" ? "/images/f.png" : "/images/m.png"}
-            alt="logo-stud"
-            width="100px"
-          />
-          <div className="student-info-div">
-            <h1>{stud.name}</h1>
-            <h3>id:{stud.student_id}</h3>
-            <p>{stud.school}</p>
-          </div>
-        </div>
 
-        <div className="table-div">
-          <table className="grades-table">
-            <tr>
-              <th>Predmet</th>
-              <th>Ocjena</th>
-            </tr>
-            {subj.map((data) => (
-              <tr key={data.name}>
-                <td className="bold-text">{data.name}</td>
-                <td className="grades-td">{data.grade}</td>
-              </tr>
-            ))}
-            <tr>
-              <td className="grades-td">Prosjek ocjena:</td>
-              <td className="grades-td bold-text">4.89</td>
-            </tr>
-          </table>
-        </div>
-        <div className="btn-div">
-          <button className="btn-ednevnik">UREDI</button>
-          <button className="btn-ednevnik delete-btn">IZBRIŠI</button>
-        </div>
-      </div>
+      {loading ? (
+        <div className="loader"></div>
+      ) : (
+        <>
+          {response !== "" || loading ? (
+            <h3>{response}</h3>
+          ) : (
+            <div className="student-main-container">
+              <div className="back-btn-div">
+                <a href="http://localhost:5173/ednevnik/admin/allstudents">
+                  <button>{"< "}Povratak na listu učenika</button>
+                </a>
+              </div>
+              <div className="student-container">
+                <img
+                  src={
+                    studentInfo && studentInfo[0].heshe === "f"
+                      ? "/images/f.png"
+                      : "/images/m.png"
+                  }
+                  alt="logo-stud"
+                  width="100px"
+                />
+                <div className="student-info-div">
+                  <h1>{studentInfo && studentInfo[0].name}</h1>
+                  <h3>id:{studentInfo && studentInfo[0].student_id}</h3>
+                  <p>{studentInfo && studentInfo[0].school}</p>
+                </div>
+              </div>
+
+              <div className="table-div">
+                <table className="grades-table">
+                  <tr>
+                    <th>Predmet</th>
+                    <th>Ocjena</th>
+                  </tr>
+                  {studentGrades &&
+                    studentGrades.map((subject) => (
+                      <tr key={subject.name}>
+                        <td className="bold-text">{subject.name}</td>
+                        <td className="grades-td">{subject.grade}</td>
+                      </tr>
+                    ))}
+                  <tr>
+                    <td className="grades-td">Prosjek ocjena:</td>
+                    <td className="grades-td bold-text">
+                      {gradesAvg && gradesAvg[0].avg}
+                    </td>
+                  </tr>
+                </table>
+              </div>
+              <div className="btn-div">
+                <button className="btn-ednevnik">UREDI</button>
+                <button className="btn-ednevnik delete-btn">IZBRIŠI</button>
+              </div>
+            </div>
+          )}
+        </>
+      )}
     </>
   );
 }

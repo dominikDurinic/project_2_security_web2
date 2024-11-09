@@ -1,7 +1,7 @@
 import { useState } from "react";
 //import { useAuth0 } from "@auth0/auth0-react";
 
-export function Bac(props: { vule: boolean }) {
+export function Bac() {
   const [msg, setMsg] = useState<string>("");
   //const [response, setResponse] = useState<string>("");
   /*
@@ -50,7 +50,6 @@ export function Bac(props: { vule: boolean }) {
           Pretraži
         </button>
       </div>
-      <p>{response}</p>
     </>
   );
 }

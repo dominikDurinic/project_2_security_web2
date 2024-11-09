@@ -1,7 +1,7 @@
 export function EdnevnikItem(props: {
   name: string;
   heShe: string;
-  student_id: string;
+  student_id: number;
   index: number;
 }) {
   return (
