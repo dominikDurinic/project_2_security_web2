@@ -49,14 +49,17 @@ export function Student() {
     const getStudentInfo = async () => {
       try {
         const token = await getAccessTokenSilently();
-        const resp = await fetch(`http://localhost:8000/student/${id}`, {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ vule: vule }),
-        });
+        const resp = await fetch(
+          `https://hackatest-backend.onrender.com/student/${id}`,
+          {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ vule: vule }),
+          }
+        );
         if (!resp.ok) {
           throw new Error(resp.status + " " + resp.statusText);
         } else {
@@ -74,14 +77,17 @@ export function Student() {
     const getStudentGrades = async () => {
       try {
         const token = await getAccessTokenSilently();
-        const resp = await fetch(`http://localhost:8000/student/grades/${id}`, {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ vule: vule }),
-        });
+        const resp = await fetch(
+          `https://hackatest-backend.onrender.com/student/grades/${id}`,
+          {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ vule: vule }),
+          }
+        );
         if (!resp.ok) {
           throw new Error(resp.status + " " + resp.statusText);
         } else {
@@ -100,7 +106,7 @@ export function Student() {
       try {
         const token = await getAccessTokenSilently();
         const resp = await fetch(
-          `http://localhost:8000/student/grades/avg/${id}`,
+          `https://hackatest-backend.onrender.com/student/grades/avg/${id}`,
           {
             method: "POST",
             headers: {

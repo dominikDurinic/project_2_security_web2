@@ -34,14 +34,17 @@ export function AllStudents() {
     const getStudents = async () => {
       try {
         const token = await getAccessTokenSilently();
-        const resp = await fetch("http://localhost:8000/allstudents", {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ vule: vule }),
-        });
+        const resp = await fetch(
+          "https://hackatest-backend.onrender.com/allstudents",
+          {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ vule: vule }),
+          }
+        );
         if (!resp.ok) {
           throw new Error(resp.status + " " + resp.statusText);
         } else {
