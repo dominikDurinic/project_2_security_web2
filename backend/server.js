@@ -32,6 +32,10 @@ const checkRole = (req, allowedRole) => {
   }
 };
 
+server.get("/", (req, res) => {
+  return res.send("Welcome to HackaTest API.");
+});
+
 server.post("/allstudents", checkJwt, async (req, res) => {
   const vulnerability = req.body;
 
