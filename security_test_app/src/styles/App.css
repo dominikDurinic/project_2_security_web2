@@ -1,3 +1,54 @@
+@media only screen and (max-width:1024px) {
+    .header-container{
+        box-shadow: none !important;
+    }
+
+    main{
+        width: 100% !important;
+    }
+
+    .vul-container{
+        width: 100% !important;
+        padding: 20px 0px !important;
+        box-shadow: none !important;
+    }
+
+    .vul-container > img{
+        padding: 0px 10px;
+    }
+
+    .vul-div{
+        padding: 0px 10px;
+    }
+
+
+    .vulCard-container{
+        width: 100% !important;
+        box-shadow: none !important;
+        padding: 20px 0px !important;
+    }
+
+    .vulCard-container > p{
+        padding: 0px 10px;
+    }
+
+    .btnDiv{
+        padding: 0px 10px !important;
+    }
+
+    .ednevnikList-div{
+        width: 100% !important;
+    }
+
+    .ednevnikList-div > h2, .ednevnikList-div > p{
+        padding: 0px 10px;
+    }
+
+    .ednevnik-a{
+        width: 100%;
+    }
+}
+
 main{
     display: flex;
     flex-direction: column;
@@ -94,6 +145,10 @@ main{
     gap: 10px;
 }
 
+.vul-div > h2{
+    text-align: center;
+}
+
 .vul-icon{
     border-radius: 50%;
     width: 60px;
@@ -107,6 +162,7 @@ main{
     border: 1px black;
     box-shadow: 2px 2px #dcdcdc;
     background-color: #dcdcdc;
+    text-align: start;
 }
 
 .btn-vul-start{

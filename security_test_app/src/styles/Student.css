@@ -1,3 +1,14 @@
+@media only screen and (max-width:1024px) {
+    .student-main-container{
+        width: 100% !important;
+    }
+
+    .btn-div{
+        flex-direction: column !important;
+        align-items: center;
+    }
+}
+
 .student-main-container{
     width: 1000px;
 }
@@ -69,7 +80,7 @@ tr:nth-child(even) {
 }
 
 .back-btn-div{
-    padding: 20px;
+    padding: 20px 0px;
     display: flex;
     width: 100%;
 }

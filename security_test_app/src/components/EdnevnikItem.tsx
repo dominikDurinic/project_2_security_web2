@@ -7,7 +7,7 @@ export function EdnevnikItem(props: {
   return (
     <a
       className="ednevnik-a"
-      href={`https://hackatest.onrender.com/ednevnik/admin/student/${props.student_id}`}
+      href={`/ednevnik/admin/student/${props.student_id}`}
     >
       <div className="vul-container">
         <div className="vul-div">

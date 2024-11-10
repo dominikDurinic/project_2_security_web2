@@ -29,6 +29,7 @@ export function VulItem(props: {
             ? "/images/up.png"
             : "/images/down.png"
         }
+        alt="up and down icon"
         width={"20px"}
         height={"20px"}
       />

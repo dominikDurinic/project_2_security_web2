@@ -149,7 +149,7 @@ export function Student() {
           ) : (
             <div className="student-main-container">
               <div className="back-btn-div">
-                <a href="https://hackatest.onrender.com/ednevnik/admin/allstudents">
+                <a href="/ednevnik/admin/allstudents">
                   <button>{"< "}Povratak na listu učenika</button>
                 </a>
               </div>

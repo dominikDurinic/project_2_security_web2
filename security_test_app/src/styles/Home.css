@@ -9,6 +9,10 @@
     height: 100%;
 }
 
+.home-about > p{
+    padding: 0px 20px;
+}
+
 .btn-home-start{
     border: none;
     width: 300px;
