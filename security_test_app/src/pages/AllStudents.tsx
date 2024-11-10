@@ -46,7 +46,7 @@ export function AllStudents() {
           }
         );
         if (!resp.ok) {
-          throw new Error(resp.status + " " + resp.statusText);
+          throw new Error(resp.status + " " + resp.text);
         } else {
           const data = await resp.json();
 
