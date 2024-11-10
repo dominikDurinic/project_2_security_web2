@@ -71,6 +71,7 @@ main{
     padding: 20px 0px;
     color: white;
     box-shadow: 3px 3px #dcdcdc;
+    z-index: 2;
 }
 
 .header-ednvnik{
