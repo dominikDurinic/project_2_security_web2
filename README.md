@@ -7,8 +7,10 @@ Repozitorij s izvornim kodom aplikacije kao rješenje **drugog projekta** iz pre
 
 ## URL-ovi aplikacija:
 
-**HackaTest web app** - https://hackatest.onrender.com/
-**HackaTest API** - https://hackatest-backend.onrender.com/
+**HackaTest web app** - https://hackatest.onrender.com
+</br>
+</br>
+**HackaTest API** - https://hackatest-backend.onrender.com
 
 </br>
 Izradio: Dominik Đurinić, listopad 2024.
