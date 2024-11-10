@@ -13,4 +13,4 @@ Repozitorij s izvornim kodom aplikacije kao rješenje **drugog projekta** iz pre
 **HackaTest API** - https://hackatest-backend.onrender.com
 
 </br>
-Izradio: Dominik Đurinić, listopad 2024.
+Izradio: Dominik Đurinić, studeni 2024.
