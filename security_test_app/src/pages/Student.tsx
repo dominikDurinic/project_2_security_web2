@@ -61,7 +61,8 @@ export function Student() {
           }
         );
         if (!resp.ok) {
-          throw new Error(resp.status + " " + resp.statusText);
+          const data = await resp.text();
+          throw new Error(resp.status + " " + data);
         } else {
           const data = await resp.json();
 
@@ -89,7 +90,8 @@ export function Student() {
           }
         );
         if (!resp.ok) {
-          throw new Error(resp.status + " " + resp.statusText);
+          const data = await resp.text();
+          throw new Error(resp.status + " " + data);
         } else {
           const data = await resp.json();
 
@@ -117,7 +119,8 @@ export function Student() {
           }
         );
         if (!resp.ok) {
-          throw new Error(resp.status + " " + resp.statusText);
+          const data = await resp.text();
+          throw new Error(resp.status + " " + data);
         } else {
           const data = await resp.json();
 
